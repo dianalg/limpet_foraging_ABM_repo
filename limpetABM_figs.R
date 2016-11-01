@@ -25,6 +25,7 @@ source("plot.loglog.color.R")
 source("fits.R")
 source("plot.fits.R")
 source("plot_counts.R")
+source("plot.bw.R")
 
 # Fix Inf values in data
 
@@ -90,16 +91,28 @@ CBR_data <- av.and.std(data, data$uCBR)
 Frat_data <- av.and.std(data, data$Frat)
 
 ## ------------------------------------
-# FIT DATA
+# VISUALIZE FOOD FOUND DATA (FIGURE 2)
+
+plot.bw(foodfound_data, data$percover, 60, 'Percent Cover', 'Food Found', 1000, both=TRUE)
+
+## ------------------------------------
+# VISUALIZE COST-BENEFIT RATIO DATA (FIGURE 3)
+
+plot.bw(CBR_data, data$percover, 60, 'Percent Cover', 'Cost/Benefit Ratio', 150, both=TRUE)
+
+## ------------------------------------
+# VISUALIZE EFFICIENCY DATA (FIGURE 4)
+
+plot.bw(Frat_data, data$percover, 60, 'Percent Cover', 'Efficiency', 1.5, both=TRUE)
+
+## ------------------------------------
+# PLOT FOR SICB EXTENDED ABSTRACT 2017 (DLG)
 
 xs = (unique(data$foodarea)/500^2)*100
 
 power_foodfound = fits(foodfound_data, xs, "power", list(a=1, b=0.5), 1000)
 
 power_CBR = fits(CBR_data, xs, "power", list(a=50, b=1), 900)
-
-## ------------------------------------
-# PLOT FOR SICB EXTENDED ABSTRACT 2017 (DLG)
 
 # raw data plot:
 
